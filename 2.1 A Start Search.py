@@ -27,8 +27,8 @@ def AStarSearch():
 
     '''find the visited nodes'''
     while True:
-        fs = [i[1] for i in opened]     # fs = f(s) = g(s) + h(s)
-        chosen_index = fs.index(min(fs))
+        fn = [i[1] for i in opened]     # fn = f(n) = g(n) + h(n)
+        chosen_index = fn.index(min(fn))
         node = opened[chosen_index][0]  # current node
         closed.append(opened[chosen_index])
         del opened[chosen_index]
@@ -38,9 +38,9 @@ def AStarSearch():
             if item[0] in [closed_item[0] for closed_item in closed]:
                 continue
             cost.update({item[0]: cost[node] + item[1]})            # add nodes to cost dictionary
-            fs_node = cost[node] + heuristic[item[0]] + item[1]     # calculate f(s) of current node
-            temp = [item[0], fs_node]
-            opened.append(temp)                                     # store f(s) of current node in array opened
+            fn_node = cost[node] + heuristic[item[0]] + item[1]     # calculate f(n) of current node
+            temp = [item[0], fn_node]
+            opened.append(temp)                                     # store f(n) of current node in array opened
 
     '''find optimal sequence'''
     trace_node = 'G'                        # correct optimal tracing node, initialize as node G
